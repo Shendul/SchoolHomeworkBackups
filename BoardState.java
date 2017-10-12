@@ -42,7 +42,8 @@ public class BoardState implements Comparable{
 		// You must implement this method
 		// The objects are equal if the currentState[] arrays
 		// are identical
-		int[] itemState =  ((BoardState) item).getCurrentState();
+		BoardState itemBoard = (BoardState) item;
+		int[] itemState = itemBoard.getCurrentState();
 		for (int i = 0; i < 9; i++) {
 			if(this.currentState[i] != itemState[i]) {
 				return false;

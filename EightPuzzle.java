@@ -25,7 +25,7 @@ public class EightPuzzle  {
 		generateAllPossibleStates();
 		
 		long totalRunTime = 0;
-		int statesSolved = 0;
+		int statesSolved = 1;
 		
 		for(int i = 0;i < AllPossibleStates.length;++i){
 		
@@ -41,10 +41,16 @@ public class EightPuzzle  {
 				while(!goalFound) {
 					BoardState currentState = openNodesQueue.PriorityDequeue();
 					if(currentState.equals(GoalState)) {
-						printPath(currentState, count);
+						int numMoves = currentState.getG();
+						printPath(currentState, currentState.getG());
+						System.out.println("==================================================");
+						System.out.println("            PREVIOUS SOLUTION DATA                ");
+						System.out.println("Number of moves: " + numMoves + ", Time Needed: " + " Seconds");
+						System.out.println("States solved: " + statesSolved + ", Total Running Time: " + " Minutes");
+						System.out.println("==================================================");
 						goalFound = true;
 					} else {
-						count++; //dunno what this for yet prob needs to change.
+						count++;
 						String hashKey = makeKey(currentState);
 						closedNodes.put(hashKey, currentState);
 						int childCount = 0;
@@ -56,120 +62,120 @@ public class EightPuzzle  {
 						if(currentState.getCurrentState()[0] == 0) {
 							childOne = move(currentState, -1, 0);
 							childOne.setH(manhattan(childOne.getCurrentState(), GoalState.getCurrentState()));
-							childOne.setG(count - 1);
+							childOne.setG(currentState.getG() + 1);
 							childOne.setParent(currentState);
 							childTwo = move(currentState, 0, 1);
 							childTwo.setH(manhattan(childTwo.getCurrentState(), GoalState.getCurrentState()));
-							childTwo.setG(count - 1);
+							childTwo.setG(currentState.getG() + 1);
 							childTwo.setParent(currentState);
 							childCount += 2;
 						} else if (currentState.getCurrentState()[1] == 0) {
 							childOne = move(currentState, 0, 1);
 							childOne.setH(manhattan(childOne.getCurrentState(), GoalState.getCurrentState()));
-							childOne.setG(count - 1);
+							childOne.setG(currentState.getG() + 1);
 							childOne.setParent(currentState);
 							childTwo = move(currentState, -1, 0);
 							childTwo.setH(manhattan(childTwo.getCurrentState(), GoalState.getCurrentState()));
-							childTwo.setG(count - 1);
+							childTwo.setG(currentState.getG() + 1);
 							childTwo.setParent(currentState);
 							childThree = move(currentState, 0, -1);
 							childThree.setH(manhattan(childThree.getCurrentState(), GoalState.getCurrentState()));
-							childThree.setG(count - 1);
+							childThree.setG(currentState.getG() + 1);
 							childThree.setParent(currentState);
 							childCount += 3;
 						} else if (currentState.getCurrentState()[2] == 0) {
 							childOne = move(currentState, -1, 0);
 							childOne.setH(manhattan(childOne.getCurrentState(), GoalState.getCurrentState()));
-							childOne.setG(count - 1);
+							childOne.setG(currentState.getG() + 1);
 							childOne.setParent(currentState);
 							childTwo = move(currentState, 0, -1);
 							childTwo.setH(manhattan(childTwo.getCurrentState(), GoalState.getCurrentState()));
-							childTwo.setG(count - 1);
+							childTwo.setG(currentState.getG() + 1);
 							childTwo.setParent(currentState);
 							childCount += 2;
 						} else if (currentState.getCurrentState()[3] == 0) {
 							childOne = move(currentState, 1, 0);
 							childOne.setH(manhattan(childOne.getCurrentState(), GoalState.getCurrentState()));
-							childOne.setG(count - 1);
+							childOne.setG(currentState.getG() + 1);
 							childOne.setParent(currentState);
 							childTwo = move(currentState, 0, 1);
 							childTwo.setH(manhattan(childTwo.getCurrentState(), GoalState.getCurrentState()));
-							childTwo.setG(count - 1);
+							childTwo.setG(currentState.getG() + 1);
 							childTwo.setParent(currentState);
 							childThree = move(currentState, -1, 0);
 							childThree.setH(manhattan(childThree.getCurrentState(), GoalState.getCurrentState()));
-							childThree.setG(count - 1);
+							childThree.setG(currentState.getG() + 1);
 							childThree.setParent(currentState);
 							childCount += 3;
 						} else if (currentState.getCurrentState()[4] == 0) {
 							childOne = move(currentState, 1, 0);
 							childOne.setH(manhattan(childOne.getCurrentState(), GoalState.getCurrentState()));
-							childOne.setG(count - 1);
+							childOne.setG(currentState.getG() + 1);
 							childOne.setParent(currentState);
 							childTwo = move(currentState, 0, 1);
 							childTwo.setH(manhattan(childTwo.getCurrentState(), GoalState.getCurrentState()));
-							childTwo.setG(count - 1);
+							childTwo.setG(currentState.getG() + 1);
 							childTwo.setParent(currentState);
 							childThree = move(currentState, -1, 0);
 							childThree.setH(manhattan(childThree.getCurrentState(), GoalState.getCurrentState()));
-							childThree.setG(count - 1);
+							childThree.setG(currentState.getG() + 1);
 							childThree.setParent(currentState);
 							childFour = move(currentState, 0, -1);
 							childFour.setH(manhattan(childFour.getCurrentState(), GoalState.getCurrentState()));
-							childFour.setG(count - 1);
+							childFour.setG(currentState.getG() + 1);
 							childFour.setParent(currentState);
 							childCount += 4;
 						} else if (currentState.getCurrentState()[5] == 0) {
 							childOne = move(currentState, 1, 0);
 							childOne.setH(manhattan(childOne.getCurrentState(), GoalState.getCurrentState()));
-							childOne.setG(count - 1);
+							childOne.setG(currentState.getG() + 1);
 							childOne.setParent(currentState);
 							childTwo = move(currentState, 0, -1);
 							childTwo.setH(manhattan(childTwo.getCurrentState(), GoalState.getCurrentState()));
-							childTwo.setG(count - 1);
+							childTwo.setG(currentState.getG() + 1);
 							childTwo.setParent(currentState);
 							childThree = move(currentState, -1, 0);
 							childThree.setH(manhattan(childThree.getCurrentState(), GoalState.getCurrentState()));
-							childThree.setG(count - 1);
+							childThree.setG(currentState.getG() + 1);
 							childThree.setParent(currentState);
 							childCount += 3;
 						} else if (currentState.getCurrentState()[6] == 0) {
 							childOne = move(currentState, 1, 0);
 							childOne.setH(manhattan(childOne.getCurrentState(), GoalState.getCurrentState()));
-							childOne.setG(count - 1);
+							childOne.setG(currentState.getG() + 1);
 							childOne.setParent(currentState);
 							childTwo = move(currentState, 0, 1);
 							childTwo.setH(manhattan(childTwo.getCurrentState(), GoalState.getCurrentState()));
-							childTwo.setG(count - 1);
+							childTwo.setG(currentState.getG() + 1);
 							childTwo.setParent(currentState);
 							childCount += 2;
 						} else if (currentState.getCurrentState()[7] == 0) {
 							childOne = move(currentState, 1, 0);
 							childOne.setH(manhattan(childOne.getCurrentState(), GoalState.getCurrentState()));
-							childOne.setG(count - 1);
+							childOne.setG(currentState.getG() + 1);
 							childOne.setParent(currentState);
 							childTwo = move(currentState, 0, -1);
 							childTwo.setH(manhattan(childTwo.getCurrentState(), GoalState.getCurrentState()));
-							childTwo.setG(count - 1);
+							childTwo.setG(currentState.getG() + 1);
 							childTwo.setParent(currentState);
 							childThree = move(currentState, 0, 1);
 							childThree.setH(manhattan(childThree.getCurrentState(), GoalState.getCurrentState()));
-							childThree.setG(count - 1);
+							childThree.setG(currentState.getG() + 1);
 							childThree.setParent(currentState);
 							childCount += 3;
 						} else if (currentState.getCurrentState()[8] == 0) {
 							childOne = move(currentState, 1, 0);
 							childOne.setH(manhattan(childOne.getCurrentState(), GoalState.getCurrentState()));
-							childOne.setG(count - 1);
+							childOne.setG(currentState.getG() + 1);
 							childOne.setParent(currentState);
 							childTwo = move(currentState, 0, -1);
 							childTwo.setH(manhattan(childTwo.getCurrentState(), GoalState.getCurrentState()));
-							childTwo.setG(count - 1);
+							childTwo.setG(currentState.getG() + 1);
 							childTwo.setParent(currentState);
 							childCount += 2;
 						}
 						
-					
+					//TODO make this work by actually comparing the child to all closed node items.
 						if(!closedNodes.containsValue(childOne) && childCount >= 1) {
 							openNodesQueue.PriorityEnqueue(childOne);
 						} if (!closedNodes.containsValue(childTwo) && childCount >= 2) {
@@ -185,6 +191,9 @@ public class EightPuzzle  {
 				
 				
 				statesSolved++;
+				closedNodes = new HashMap<String,BoardState>();
+				openNodesQueue.empty();
+				//openNodesQueue = dataStructure;
 			} // end if
 		} // end for
 		
@@ -273,7 +282,7 @@ public class EightPuzzle  {
 		int endRow = 0;
 		int endCol = 0;
 		for (int i = 0; i < initialState.length; ++i) {
-			if (initialState[i] != endState[i] && initialState[i] != 0 && endState[i] != 0) {
+			if (initialState[i] != endState[i]) {
 				if(i == 0) {
 					initRow = 1;
 					initCol = 1;
@@ -304,7 +313,7 @@ public class EightPuzzle  {
 				}
 				
 				for (int j = 0; j < endState.length; j++) {
-					if (initialState[i] == endState[j] && initialState[i] != 0 && endState[j] != 0) {
+					if (initialState[i] == endState[j]) {
 						if(j == 0) {
 							endRow = 1;
 							endCol = 1;
@@ -334,7 +343,7 @@ public class EightPuzzle  {
 							endCol = 3;
 						}
 						
-						manDist += Math.abs((endRow - initRow) + (endCol - initCol));
+						manDist += Math.abs(endRow - initRow) + Math.abs(endCol - initCol);
 					}
 				}
 			}
@@ -346,18 +355,18 @@ public class EightPuzzle  {
 		// You must implement this
 		// Prints out path to goal state
 		// Must be recursive
-		if ( count > 1) {
+		if ( count > 0) {
 			for (int i = count; i > 0; i--) {
 				BoardState parent = current.getParent();
-				printPath(parent, i);
 				for(int j = 0; j < 9; j++) {
 					if (j % 3 == 0) { // add newlines every row
 						System.out.println();
 					}
 					System.out.print(current.getCurrentState()[j]);
 				}
-				System.out.println("---");
 				System.out.println();
+				System.out.println("---");
+				printPath(parent, --i);
 			}
 		} else {
 			for(int j = 0; j < 9; j++) {
