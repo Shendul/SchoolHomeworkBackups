@@ -24,8 +24,17 @@ public class BoardState implements Comparable{
 		// You must implement this method
 		// Since we are implementing the A* algorithm,
 		// this method needs to compare the g+h in both objects.
-		int f = this.g + this.h;
-		return 0;
+		int thisF = this.g + this.h;
+		BoardState itemBoard = (BoardState) item;
+		int f = itemBoard.getG() + itemBoard.getH();
+		
+		if(thisF == f) {
+			return 0;
+		} else if (thisF > f) {
+			return 1;
+		} else {
+			return -1;
+		}
 	}
 	
 
