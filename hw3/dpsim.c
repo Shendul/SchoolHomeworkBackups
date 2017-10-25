@@ -46,7 +46,16 @@ void* th_main( void* th_main_args ) {
 		currentChops[2] == 2 && currentChops[3] == 3 &&
 		currentChops[4] == 4 ){ // If a deadlock condition is found then
 			printf("Deadlock condition (0,1,2,3,4) ... terminating\n");
-			break;
+			// 4. Kill each philosopher thread
+			/*for (int endID = 0; endID < NUM_PHILOSPHERS; endID++ ) {
+				if (pthread_kill(philosphers[endID], 1) != 0){
+					perror("pthread_kill");
+					pthread_exit(2);
+				}
+			}*/
+
+			// 5. Exit the main thread with status value equal to 0.
+			pthread_exit(0);
 		} else {
 			// display which philosophers are eating
 			if(allDown == 1){
@@ -135,17 +144,6 @@ void* th_main( void* th_main_args ) {
 		}
 	} // end loop
 
-	// 4. Kill each philosopher thread
-	for (int endID = 0; endID < NUM_PHILOSPHERS; endID++ ) {
-		if (pthread_kill(philosphers[endID], 1) != 0){
-			perror("pthread_kill");
-			pthread_exit(2);
-		}
-	}
-
-	// 5. Exit the main thread with status value equal to 0.
-	pthread_exit(0);
-
 } // end th_main function
 
 
@@ -212,7 +210,7 @@ void eat( int phil_id ) {
 			delay(17000);
 			pthread_mutex_lock( &mutex[phil_id + 1] );
 			chopsticks[phil_id + 1] = phil_id;
-			delay(700000000);
+			delay(600000000);
 			chopsticks[phil_id + 1] = -1;
 			pthread_mutex_unlock( &mutex[phil_id + 1] );
 			chopsticks[phil_id] = -1;

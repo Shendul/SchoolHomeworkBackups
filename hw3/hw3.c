@@ -28,7 +28,7 @@ int main( int argc, char** argv ) {
 
 	// ---------------------------------------
 	// TODO: you add your implementation here
-
+	int status = 0;
 	pthread_t main_thread;
 
 	if (pthread_create(&main_thread, NULL, (void *) th_main, NULL ) != 0){
@@ -37,10 +37,12 @@ int main( int argc, char** argv ) {
 		exit(1);
 	}
 
-	if (pthread_join(main_thread, NULL) != 0){
+	if (pthread_join(main_thread, 0) != 0){
 		perror("pthread_join");
 		exit(2);
 	}
+
+	printf("%d\n", status);
 
 	return 0;
 
