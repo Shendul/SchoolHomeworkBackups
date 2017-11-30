@@ -2,6 +2,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Stack;
 
 public class HuffmanTree  implements Comparable {
 	
@@ -62,26 +63,73 @@ public class HuffmanTree  implements Comparable {
 		return newNode;
 		
 	}
-	public void printAllCodes(HuffmanNode root, int code){
+	public void printAllCodes(HuffmanNode root, String code, int tDirection){
 	// ..... Left as exercise
+		
+		if (tDirection == 1) { //Left
+			code += "0";
+		} else if (tDirection == 2) { //Right
+			code += "1";
+		}
 		//Pre-order depthFirst should give us leftmost nodes.
 		if (root == null) {
 			return;
 		}
 		if (!root.string.equals(" ")) {
+			System.out.print(root.string + " ");
 			System.out.println(code);
-			code++;
 		}
-		printAllCodes(root.left, code);
-		printAllCodes(root.right, code);
+		printAllCodes(root.left, code, 1);
+		printAllCodes(root.right, code, 2);
 	}
 	
-	public String getCode(String string){
-	// Left as exercise
+	public String getCode(HuffmanNode root, String string, int tDirection, String code ){
 		
-	return null;
+		if (tDirection == 1) { //Left
+			code += "0";
+		} else if (tDirection == 2) { //Right
+			code += "1";
+		}
+		//Pre-order depthFirst should give us leftmost nodes.
+		if (root == null) {
+			return "";
+		}
+		if (!root.string.equals(" ")) {
+			if (root.string.equals(string)) {
+				return code;
+			}
+		}
+		String newCode = getCode(root.left, string, 1, code);
+		newCode += getCode(root.right, string, 2, code);
+		
+		return newCode;
 	}
-	public int compareTo(Object arg0) {
+	
+	public String getCharacter(HuffmanNode root, String decode, int tDirection, String code){
+		
+		//System.out.println(decode);
+		if (tDirection == 1) { //Left
+			code += "0";
+		} else if (tDirection == 2) { //Right
+			code += "1";
+		}
+		//Pre-order depthFirst should give us leftmost nodes.
+		if (root == null) {
+			return "";
+		}
+		if (!root.string.equals(" ")) {
+			if (decode.equals(code)) {
+				//System.out.println(code);
+				return root.string;
+			}
+		}
+		String newCharacter = getCharacter(root.left, decode, 1, code);
+		newCharacter += getCharacter(root.right, decode, 2, code);
+		
+		return newCharacter;
+	}
+	
+	public int compareTo(Object arg0) { // do i need this?
 	// ..... Left as exercise
 	return 0;
 	}

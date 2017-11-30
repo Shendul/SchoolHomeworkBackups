@@ -7,6 +7,9 @@ public class Main {
 		String fileName = "TestOne";
 		Huffman.compress(fileName);
 		
+		fileName = "TestOne.compressed";
+		Huffman.decompress(fileName);
+		
 		
 		System.out.println();
 	}
